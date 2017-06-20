@@ -1,2 +1,2 @@
 # FlighReservation
-Fligh Reservation System
+Flight Reservation System
