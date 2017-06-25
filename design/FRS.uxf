@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>621</x>
+      <y>702</y>
+      <w>342</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FlightManager&gt;&gt;
+--
+-set&lt;Flight&gt; m_flights
+
+--
+
+#Add(string _flightID) &lt;&lt;friend&gt;&gt; SupervisorUI
+#Remove(string _flightID) &lt;&lt;friend&gt;&gt; SupervisorUI
+
++get(string _flightID) : cosnt Flight&amp;
++isEmpty() : bool
+
+--
+Responsibilities
+-- Add/Remove flight to/from the list.
+-- Provide flight deatails to other components.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>63</x>
+      <y>1818</y>
+      <w>54</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Actor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>1827</y>
+      <w>81</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>1107</y>
+      <w>333</w>
+      <h>468</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Flight&gt;&gt;
+--
+-flightID : Uint
+-flightNum: string
+-departure: string
+-destination: string
+-timeDeparture: string (date?)
+- m_capacity: Uint
+-m_seats: set&lt;Seat&gt;
+
+-static Uint _flightSerialID
+
+--
++getFlightID() : Uint
++getFlightNum() : string
++setFlightNum(string _newFlightNum) : string
++getDeparture() : const string
++setDeparture(const string _deprt) : string
++getDestination() : const string
++setDestination(const string _dest) : string
++getCapacity() : uint
++setCapacity(Uint _newCapacity) : uint
++occupancy() : Uint
++isFull() : bool
++getTime() : const string
++setTime(const string _newTimeDate) : string
+
++getSeat(string _seatNum) : string&amp;
++getSeatCapacity() : Uint
++setSeatCapacity(Uint) : Uint
+
+--
+Responsibilities
+-- hold information</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1026</x>
+      <y>1107</y>
+      <w>297</w>
+      <h>405</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Passenger&gt;&gt;
+--
+-const uint m_id
+-name: string
+-address: string
+-phone: string
+-preferanceSeating: string
+-list&lt;uint&gt; tickets
+--
+getName() : string
+setName(string _name) : string
+getAddress() : string
+setAddress(string _newAddress) : string
+getPhone() : string
+setPhone(string _newPhone) : string
+getPreferance() : string
+setPreferance(string _preferance) : string
+
+addTicket(Uint _ticketNum) : bool
+removeTicket(Uint _ticketNum) : Uint
+
+getTickets() : const list&lt;Uint&gt;&amp;
+
+--
+Responsibilities
+-- hold information</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>702</y>
+      <w>342</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;PassengerManager&gt;&gt;
+--
+-set&lt;Passenger&gt; m_passengers
+
+--
+
++Add(uint _id) : bool
++Remove(uint _id) : const Passenger&amp;
+
++get(uint _id) : const Passenger&amp;
++isEmpty() : bool
+
+--
+Responsibilities
+-- Add/Remove passanger to/from the list.
+-- Provide passanger deatails to other components.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>1863</y>
+      <w>306</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Seat&gt;&gt;
+--
+- bool occupancy = false
+- const seatNum : Uint
+- cosnt seatName : string
+- uint m_ticket 
+
+--
++getOccupancy() : bool
++setOccupancy(bool _occupancyStatus) : bool
+
++getTicket() : uint
++setTicket(uint _ticketNum) : uint
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>1017</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1134</x>
+      <y>1017</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1377</x>
+      <y>1107</y>
+      <w>288</w>
+      <h>405</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Booking&gt;&gt;
+--
+-m_ticketNum : const uint 
+-m_cost : float
+-m_flighID : Uint
+-m_passangerId : Uint
+-m_seat : Uint
+-m_activeTicket : bool // history is 0
+-static uint m_staticUniqeTicketNum;
+
+--
++getTicketNum() : Uint
++getCost() : float
++setCost(float _newCost) : float
++getflighID() : Uint
++setflighID(Uint _new) : Uint
++getpassangerId() : Uint
++setpassangerId(Uint _newCost) : Uint
++getSeat() : Uint
++setSeat(float _newCost) : Uint
++getClass() : float
++setClass(float _newCost) : float
++isActive() : bool
++setActive(bool _status) : bool
+
+--
+Responsibilities
+-- hold information</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1341</x>
+      <y>702</y>
+      <w>324</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;BookingManager&gt;&gt;
+--
+-set&lt;Booking&gt; m_bookings
+--
+
++Add(uint _ticketNum) : bool
++Remove(uint _ticketNum) : const Booking&amp;
+
++get(uint _ticketNum) : const Booking&amp;
++isEmpty() : bool
+
++all booking function
+
+--
+Responsibilities
+-- Add/Remove ticket to/from the list.
+-- Provide ticket deatails to other components.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1467</x>
+      <y>1017</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1935</x>
+      <y>504</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+--
+ABC
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1764</x>
+      <y>729</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>_object: SupervisorUI_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2133</x>
+      <y>729</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>_object: UserUI_
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1845</x>
+      <y>666</y>
+      <w>189</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>190.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2025</x>
+      <y>666</y>
+      <w>198</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>1791</y>
+      <w>36</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>351</x>
+      <y>855</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;iFilter&gt;&gt;
+
+--
+
+--
+
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>477</x>
+      <y>756</y>
+      <w>162</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>315</x>
+      <y>1098</y>
+      <w>108</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>dateFilter
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>1098</y>
+      <w>108</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>locationFilter
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>1017</y>
+      <w>99</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>423</x>
+      <y>1017</y>
+      <w>99</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>189</x>
+      <y>1098</y>
+      <w>108</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>...Filters
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>243</x>
+      <y>1017</y>
+      <w>180</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;180.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>756</y>
+      <w>108</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>FilterFactory
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>810</y>
+      <w>27</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>855</y>
+      <w>126</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>FiltersCompositor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>774</y>
+      <w>162</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>207</x>
+      <y>909</y>
+      <w>36</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>963</x>
+      <y>315</y>
+      <w>450</w>
+      <h>333</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Manager&gt;&gt;
+--
+- FlightManager* m_flightMngPtr
+- PassengerManager* m_passengerMngPtr
+- BookingManager* m_bookingMngPtr
+- Communicator* m_comm; XXX!!!!!!!!!!!!!!!!!!!!!!!!!!!?
+--
++order(uint flightID, uint _seatNum, uint _passengerID) : uint ticket
++cancelTicket(uint _ticketNum) : bool
++passenger(all Deatils) : void create if needed update of not
++removePassenger(uint _passengerID) : bool
+
+findFlight(tempalte X) : list of flights
+#removeFlight(uint _flightID) : bool
+#addFlight(all flight data) : uint
+#updateFlight(all flight data + flightID) : bool
+
++ function from sub mangers. like:
++ getters of passengers
++ getters of tickts
++ getters of flight
++ getters of seat
+
+
+
+--
+Responsibilities
+-- move information to/from UI and subClass
+-- handle function between subclass</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1521</x>
+      <y>495</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Communicator&gt;&gt;
+--
+
+_*SpaceHolder*_
+
+2n Named Pipe
+one client and one server
+--
+connect()
+disconnect
+send()
+recive()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>702</x>
+      <y>495</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Observer&gt;&gt;
+--
+
+_*SpaceHolder*_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1701</x>
+      <y>522</y>
+      <w>252</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1404</x>
+      <y>468</y>
+      <w>135</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1323</y>
+      <w>297</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>config file plane
+--
+m_planeId : string
+m_capacity : uint
+m_tiers : list&lt;Pair&lt;TierObj,NumofSeats&gt; &gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>693</x>
+      <y>1629</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Tier&gt;&gt;
+--
+-		const string m_tierID;
+-		const uint m_firstSeatNum;
+-		const uint m_capacity;
+-		uint m_occupiedNum;
+-		vector&lt;Seat_t&gt; m_seats;
+-		uint m_price;
+#static m_seatSerialNum : uint;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>774</x>
+      <y>1566</y>
+      <w>45</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>1332</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>planeParser
+--
+id: Long="36548"
+[waiting for message]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>1359</y>
+      <w>108</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>1359</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1404</x>
+      <y>54</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FRS_App&gt;&gt;
+--
+--
+
+_*SpaceHolder*_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1521</x>
+      <y>216</y>
+      <w>36</w>
+      <h>297</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1575</x>
+      <y>216</y>
+      <w>396</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;420.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1296</x>
+      <y>216</y>
+      <w>135</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>927</x>
+      <y>639</y>
+      <w>126</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1269</x>
+      <y>639</y>
+      <w>180</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1143</x>
+      <y>639</y>
+      <w>27</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+fg=black
+bg=black</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+</diagram>

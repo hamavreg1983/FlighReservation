@@ -12,6 +12,8 @@ CPP_SRCS += \
 ../src/FlightManager_t_test.cpp \
 ../src/Flight_t.cpp \
 ../src/Fligth_t_test.cpp \
+../src/Manager_t.cpp \
+../src/Manager_t_test.cpp \
 ../src/PassengerManagert.cpp \
 ../src/PassengerManagert_test.cpp \
 ../src/Passenger_t.cpp \
@@ -29,6 +31,8 @@ OBJS += \
 ./src/FlightManager_t_test.o \
 ./src/Flight_t.o \
 ./src/Fligth_t_test.o \
+./src/Manager_t.o \
+./src/Manager_t_test.o \
 ./src/PassengerManagert.o \
 ./src/PassengerManagert_test.o \
 ./src/Passenger_t.o \
@@ -46,6 +50,8 @@ CPP_DEPS += \
 ./src/FlightManager_t_test.d \
 ./src/Flight_t.d \
 ./src/Fligth_t_test.d \
+./src/Manager_t.d \
+./src/Manager_t_test.d \
 ./src/PassengerManagert.d \
 ./src/PassengerManagert_test.d \
 ./src/Passenger_t.d \
