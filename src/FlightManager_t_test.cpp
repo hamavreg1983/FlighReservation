@@ -34,9 +34,11 @@ TEST(FlightManager_t, addFlight_test)
 	EXPECT_TRUE(FM.isEmpty() );
 	EXPECT_EQ(FM.count(), (uint) 0 );
 
+	EXPECT_FALSE( FM.isFlightExsists(flightBaseId - 1) );
 	EXPECT_EQ( FM.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId);
 	EXPECT_FALSE(FM.isEmpty() );
 	EXPECT_EQ(FM.count(), flightBaseId );
+	EXPECT_TRUE( FM.isFlightExsists(flightBaseId) );
 
 	EXPECT_EQ( FM.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId);
 	EXPECT_FALSE(FM.isEmpty() );

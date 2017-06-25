@@ -47,6 +47,9 @@ class Flight_t
 		uint setTierPrice(const string& _tier, uint price);
 		const vector<string> getTiersName() const;
 
+		const string& getTierName(uint _seatNum) const;
+		uint getSeatPrice(uint _seatNum) const;
+
 		bool isSeatOccupancy(uint _seatNum) const;
 		uint getTicket(uint _seatNum) const;
 		const std::string& getSeatName(uint _seatNum) const;

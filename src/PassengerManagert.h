@@ -32,6 +32,7 @@ class PassengerManager_t
 		uint count() const;
 
 		const string& getAddress(uint _passengerID) const;
+		const string& setAddress(uint _passengerID, const string& _address);
 		const string& getName(uint _passengerID) const;
 		const string& setName(uint _passengerID, const string& name);
 		const string& getPhone(uint _passengerID) const;

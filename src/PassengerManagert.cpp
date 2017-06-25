@@ -146,3 +146,9 @@ bool PassengerManager_t::addPassenger(uint _id, const string _name, const string
 
 	return ret.second;
 }
+
+const string& PassengerManager_t::setAddress(uint _passengerID,
+		const string& _address)
+{
+	return this->findPassenger(_passengerID).setAddress(_address);
+}

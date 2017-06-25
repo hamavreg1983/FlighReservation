@@ -258,3 +258,13 @@ Tier_t* Flight_t:: findSeatTier(uint _seatNum) const
 
 	return 0;
 }
+
+const string& Flight_t::getTierName(uint _seatNum) const
+{
+	return this->findSeatTier(_seatNum)->getTierId();
+}
+
+uint Flight_t::getSeatPrice(uint _seatNum) const
+{
+	return this->findSeatTier(_seatNum)->getPrice();
+}

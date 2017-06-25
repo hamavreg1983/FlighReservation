@@ -32,6 +32,7 @@ class FlightManager_t
 
 		uint addFlight(const string& _flightNum, const string& _departure, const string& _destination, const string& _timeDeparture, const string& _plane ); 		// TODO <<friend>> SupervisorUI
 		bool removeFlight(uint _flightID); 		// TODO <<friend>> SupervisorUI
+		bool isFlightExsists(uint _flightID) const;
 
 		uint getCapacity(uint _flightID) const;
 		const string& getDeparture(uint _flightID) const;
@@ -48,6 +49,7 @@ class FlightManager_t
 		bool isFlightFull(uint _flightID) const;
 		const vector<uint> getFreeSeats(uint _flightID, const string& _tier) const;
 		uint getTierPrice(uint _flightID, const string& _tier) const;
+		uint getSeatPrice(uint _flightID, uint _seatNum) const;
 		uint setTierPrice(uint _flightID, const string& _tier, uint price);
 		const vector<string> getTiersName(uint _flightID) const;
 

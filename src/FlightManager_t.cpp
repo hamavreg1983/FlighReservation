@@ -189,3 +189,17 @@ Flight_t* FlightManager_t::findFlight(uint _flightID) const
 	}
 	return (itr == m_flights.end() ) ? 0 : (*itr).second;
 }
+
+uint FlightManager_t::getSeatPrice(uint _flightID, uint _seatNum) const
+{
+	return this->findFlight(_flightID)->getSeatPrice(_seatNum);
+}
+
+bool FlightManager_t::isFlightExsists(uint _flightID) const
+{
+	map<uint,Flight_t*>::const_iterator itr;
+
+	itr = m_flights.find(_flightID);
+
+	return (itr == m_flights.end() ) ? false : true;
+}
