@@ -4,6 +4,10 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/BookingManager_t.cpp \
+../src/BookingManager_t_test.cpp \
+../src/Booking_t.cpp \
+../src/Bookingt_test.cpp \
 ../src/FlightManager_t.cpp \
 ../src/FlightManager_t_test.cpp \
 ../src/Flight_t.cpp \
@@ -17,6 +21,10 @@ CPP_SRCS += \
 ../src/allUnitTest.cpp 
 
 OBJS += \
+./src/BookingManager_t.o \
+./src/BookingManager_t_test.o \
+./src/Booking_t.o \
+./src/Bookingt_test.o \
 ./src/FlightManager_t.o \
 ./src/FlightManager_t_test.o \
 ./src/Flight_t.o \
@@ -30,6 +38,10 @@ OBJS += \
 ./src/allUnitTest.o 
 
 CPP_DEPS += \
+./src/BookingManager_t.d \
+./src/BookingManager_t_test.d \
+./src/Booking_t.d \
+./src/Bookingt_test.d \
 ./src/FlightManager_t.d \
 ./src/FlightManager_t_test.d \
 ./src/Flight_t.d \
@@ -47,7 +59,7 @@ CPP_DEPS += \
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I../../googleTest/gtest -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -I../../googleTest/gtest -I../gtest -I./gtest/ -I../../gtest -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
