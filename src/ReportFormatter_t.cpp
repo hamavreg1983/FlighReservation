@@ -75,6 +75,3 @@ string ReportFormatter_t:: itos(int _num) const
 	return convert.str(); // set 'Result' to the contents of the stream
 }
 
-const vector<string> ReportFormatter_t::reportPassenger(uint _passenger) const
-{
-}
