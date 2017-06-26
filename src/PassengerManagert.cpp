@@ -113,7 +113,7 @@ Passenger_t& PassengerManager_t::findPassenger(uint _id) const
 
 	if (itr == m_passengers.end() )
 	{
-		throw "asked parameter to get was not found in container.";
+		throw "asked Passenger to get was not found in container.";
 	}
 
 	return (Passenger_t&) *itr; //remove const
@@ -151,4 +151,9 @@ const string& PassengerManager_t::setAddress(uint _passengerID,
 		const string& _address)
 {
 	return this->findPassenger(_passengerID).setAddress(_address);
+}
+
+void PassengerManager_t::removeAllTicket(uint _passengerID)
+{
+	return this->findPassenger(_passengerID).removeAllTicket();
 }

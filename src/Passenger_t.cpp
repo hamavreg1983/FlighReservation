@@ -121,4 +121,8 @@ bool Passenger_t::operator ==(const Passenger_t& _other) const
 	return m_id == _other.m_id;
 }
 
-
+void Passenger_t::removeAllTicket()
+{
+	m_tickets.clear();
+	return;
+}

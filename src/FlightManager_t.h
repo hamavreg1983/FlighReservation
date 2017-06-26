@@ -61,7 +61,7 @@ class FlightManager_t
 		bool orderSeat(uint _flightID, uint _seatNum, uint _ticketNum) const;
 		bool cancelSeat(uint _flightID, uint _seatNum) const;
 
-
+		uint getTotalFlightNum() const;
 	protected:
 
 		//Flight_t* findFlight(const string _flightNum) const;

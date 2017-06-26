@@ -18,7 +18,7 @@ static string _destination = "LAX";
 static string _plane = "LAX";
 static string _when = "LAX";
 
-static uint flightBaseId = 0;
+static uint flightBaseId;
 
 static uint seatNum = 100;
 static uint ticketNum = 54321;
@@ -27,6 +27,14 @@ TEST(FlightManager_t, init)
 {
 	FlightManager_t FM;
 }
+
+TEST(FlightManager_t, flightStaticCounter)
+{
+	FlightManager_t FM;
+	flightBaseId = FM.getTotalFlightNum();
+}
+
+
 
 TEST(FlightManager_t, addFlight_test)
 {
@@ -37,12 +45,12 @@ TEST(FlightManager_t, addFlight_test)
 	EXPECT_FALSE( FM.isFlightExsists(flightBaseId - 1) );
 	EXPECT_EQ( FM.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId);
 	EXPECT_FALSE(FM.isEmpty() );
-	EXPECT_EQ(FM.count(), flightBaseId );
+	EXPECT_EQ(FM.count(), (uint) 1 );
 	EXPECT_TRUE( FM.isFlightExsists(flightBaseId) );
 
 	EXPECT_EQ( FM.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId);
 	EXPECT_FALSE(FM.isEmpty() );
-	EXPECT_EQ(FM.count(), flightBaseId );
+	EXPECT_EQ(FM.count(), (uint) 2 );
 
 }
 

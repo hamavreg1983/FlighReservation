@@ -61,7 +61,7 @@ uint Manager_t::order(uint flightID, uint _seatNum, uint _passengerID)
 	// get the price of the seat ordered
 	uint price = m_flightMngPtr->getSeatPrice(flightID, _seatNum);
 	// create a ticket in booking,
-	uint newTicketNum = m_bookingMngPtr->addTicket(_passengerID, _seatNum, _passengerID, price);
+	uint newTicketNum = m_bookingMngPtr->addTicket(flightID, _seatNum, _passengerID, price);
 	// actually save the seat on the plane
 	if (! m_flightMngPtr->orderSeat(flightID, _seatNum, newTicketNum) )
 	{ // order failed
@@ -80,13 +80,12 @@ bool Manager_t::cancelTicket(uint _ticketNum)
 	uint seat = m_bookingMngPtr->getSeat(_ticketNum);
 	uint passenger = m_bookingMngPtr->getPassangerId(_ticketNum);
 
-	bool result = false;
 	// cancel ticket information across system
-	result |= m_bookingMngPtr->removeTicket(_ticketNum);
+	bool resultTicket = m_bookingMngPtr->removeTicket(_ticketNum);
 	m_passengerMngPtr->removeTicket(passenger, _ticketNum);
-	result |= m_flightMngPtr->cancelSeat(flight, seat);
+	bool resultSeat =  m_flightMngPtr->cancelSeat(flight, seat);
 
-	return result;
+	return (resultTicket && resultSeat) ? true : false;
 }
 
 void Manager_t::passenger(uint _id, const string _name, const string _address,
@@ -118,18 +117,16 @@ bool Manager_t::removePassenger(uint _passengerID)
 
 	list<uint> tickets;
 	tickets = m_passengerMngPtr->getTickets(_passengerID);
-
 	list<uint>::iterator itr = tickets.begin();
+
 	while ( itr != tickets.end() )
 	{
-		// cancelTicket function also removes ticket from passenger
-		if ( this->cancelTicket(*itr) )
-		{
-			return false;
-		}
+		// cancelTicket function also removes ticket from passenger. but it doesn't matter as we remove passnger in a few lines
+		this->cancelTicket(*itr);
 		++itr;
 	}
-	return true;
+
+	return m_passengerMngPtr->removePassenger(_passengerID);
 }
 
 uint Manager_t::addFlight(const string& _flightNum, const string& _departure,

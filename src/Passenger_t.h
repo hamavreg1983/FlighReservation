@@ -35,6 +35,7 @@ class Passenger_t
 
 		void addTicket(uint _ticketNum);
 		uint removeTicket(uint _ticketNum);
+		void removeAllTicket();
 		const list<uint>& getTickets() const;
 
 		bool operator< (const Passenger_t& _other) const;

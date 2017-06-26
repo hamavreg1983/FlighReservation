@@ -42,6 +42,7 @@ class PassengerManager_t
 
 		void addTicket(uint _passengerID, uint _ticketNum);
 		uint removeTicket(uint _passengerID, uint _ticketNum);
+		void removeAllTicket(uint _passengerID);
 		const list<uint>& getTickets(uint _passengerID) const;
 
 		bool isPassengerExist(uint _passengerID) const;

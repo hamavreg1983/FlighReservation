@@ -208,3 +208,8 @@ const string& FlightManager_t::getTierName(uint _flightID, uint _SeatNum) const
 {
 	return this->findFlight(_flightID)->getTierName(_flightID);
 }
+
+uint FlightManager_t::getTotalFlightNum() const
+{
+	return Flight_t::getFlightStaticID();
+}

@@ -32,7 +32,6 @@ SOURCE_PATH = src/
 OBJECT_PATH = src/
 
 CFLAGS = -g -ansi -pedantic -Wall -I $(HPATH) -I $(H_LOCAL_PATH)
-#<enter> -I $(LIB_NEEDED_PATH1)/../inc/
 CC = g++
 
 .Phony : clean rebuild run unitTest

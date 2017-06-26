@@ -18,8 +18,16 @@ static string _when = "LAX";
 
 static uint flightBaseId = 0;
 
-//static uint seatNum = 100;
-//static uint ticketNum = 54321;
+static uint seatNum = 100;
+static uint ticketNum = 54321;
+
+static uint passengerID = 39850706;
+static string name = "yuval";
+static string address = "TelAviv";
+static string phone = "054-6379917";
+static string preferanceSeating = "next to a windows";
+
+static uint ticketProducedNum = 0;
 
 TEST(Manager_t, init)
 {
@@ -62,26 +70,66 @@ TEST(Manager_t, updateFlight)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 TEST(Manager_t, order)
 {
 	Manager_t m(0);
-//	m.
+	EXPECT_ANY_THROW( m.order(flightBaseId, seatNum, passengerID) );
+	EXPECT_EQ( m.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId );
+	EXPECT_ANY_THROW( m.order(flightBaseId, seatNum, passengerID) );
+
+	EXPECT_TRUE( m.removeFlight(flightBaseId) );
+	EXPECT_NO_THROW( m.passenger(passengerID, name, address, phone, preferanceSeating) );
+	EXPECT_ANY_THROW( m.order(flightBaseId, seatNum, passengerID) );
+
+	EXPECT_EQ( m.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId );
+	EXPECT_NO_THROW( ticketProducedNum = m.order(flightBaseId, seatNum, passengerID) );
+
+	EXPECT_EQ( m.countTickets() , (uint) 1 );
+	EXPECT_ANY_THROW( m.order(flightBaseId, seatNum, passengerID) );
+
+	EXPECT_EQ( m.countTickets() , (uint) 1 );
 }
 
-// TODO cancel
-// TODO pessenger
-// TODO remove passenger
+TEST(Manager_t, cancelTicket)
+{
+	Manager_t m(0);
+	EXPECT_ANY_THROW( m.cancelTicket(ticketNum) );
+	EXPECT_EQ( m.addFlight(_flightNum, _departure, _destination, _when, _plane) , ++flightBaseId );
+	EXPECT_NO_THROW( m.passenger(passengerID, name, address, phone, preferanceSeating) );
+	EXPECT_ANY_THROW( m.cancelTicket(ticketNum) );
+
+	EXPECT_NO_THROW( ticketProducedNum = m.order(flightBaseId, seatNum, passengerID) );
+	EXPECT_EQ( m.countTickets() , (uint) 1 );
+
+	EXPECT_TRUE( m.cancelTicket(ticketProducedNum) );
+	EXPECT_EQ( m.countTickets() , (uint) 0 );
+	EXPECT_THROW( m.cancelTicket(ticketNum) , const char* );
+
+}
+
+TEST(Manager_t, passenger)
+{
+	Manager_t m(0);
+	EXPECT_FALSE( m.isPassengerExist(passengerID) );
+	EXPECT_FALSE( m.removePassenger(passengerID) );
+	EXPECT_NO_THROW( m.passenger(passengerID, name, address, phone, preferanceSeating) );
+	EXPECT_EQ( m.getName(passengerID) , name);
+	EXPECT_NO_THROW( m.passenger(passengerID, "not Yuval", address, phone, preferanceSeating) );
+	EXPECT_EQ( m.getName(passengerID) , "not Yuval");
+	EXPECT_TRUE( m.isPassengerExist(passengerID) );
+
+}
+
+TEST(Manager_t, passengerRemove)
+{
+	Manager_t m(0);
+	EXPECT_NO_THROW( m.passenger(passengerID, name, address, phone, preferanceSeating) );
+
+	EXPECT_TRUE( m.removePassenger(passengerID) );
+	EXPECT_FALSE( m.removePassenger(passengerID) );
+	EXPECT_FALSE( m.isPassengerExist(passengerID) );
+	EXPECT_FALSE( m.isPassengerExist(passengerID) );
+}
 
 
 
