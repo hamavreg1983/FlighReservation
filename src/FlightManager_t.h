@@ -52,6 +52,7 @@ class FlightManager_t
 		uint getSeatPrice(uint _flightID, uint _seatNum) const;
 		uint setTierPrice(uint _flightID, const string& _tier, uint price);
 		const vector<string> getTiersName(uint _flightID) const;
+		const string& getTierName(uint _flightID, uint _SeatNum) const;
 
 		bool isSeatOccupancy(uint _flightID, uint _seatNum) const;
 		uint getTicket(uint _flightID, uint _seatNum) const;

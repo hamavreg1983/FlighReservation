@@ -18,8 +18,8 @@ static string _when = "LAX";
 
 static uint flightBaseId = 0;
 
-static uint seatNum = 100;
-static uint ticketNum = 54321;
+//static uint seatNum = 100;
+//static uint ticketNum = 54321;
 
 TEST(Manager_t, init)
 {
@@ -57,7 +57,8 @@ TEST(Manager_t, updateFlight)
 
 	EXPECT_TRUE( m.updateFlight(flightBaseId, _flightNum, _departure, _departure, _when) );
 	EXPECT_FALSE( m.updateFlight(flightBaseId + 30, _flightNum, _departure, _departure, _when)  );
-	// TODO m.get flight data
+	EXPECT_EQ ( m.getDestination(flightBaseId) , _departure);
+	EXPECT_EQ ( m.getDeparture(flightBaseId) , _departure);
 }
 
 

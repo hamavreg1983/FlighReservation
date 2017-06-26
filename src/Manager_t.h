@@ -9,6 +9,7 @@
 #define MANAGER_T_H_
 
 #include <string>
+#include <vector>
 
 typedef unsigned int uint;
 using namespace std;
@@ -16,6 +17,7 @@ using namespace std;
 class FlightManager_t;
 class PassengerManager_t;
 class BookingManager_t;
+class ReportFormatter_t;
 class Communicator_t;
 
 class Manager_t
@@ -35,29 +37,48 @@ class Manager_t
 
 		//findFlight(tempalte X) : list of flights // TODO
 
-
-
-
-
 		// flights function
+		const string& getDeparture(uint _flightID) const;
+		const string& getDestination(uint _flightID) const;
+		const string& getFlightNum(uint _flightID) const;
+		const string& getTimeDeparture(uint _flightID) const;
+		uint numberOfSeatAvalibul(uint _flightID) const;
+		bool isFlightFull(uint _flightID) const;
+		// TODO devide to get seatInfo, than i can do it for all sort and quntity
+		const vector<vector<string> > getFreeSeats(uint _flightID, const string& _tier) const;
+		uint getTierPrice(uint _flightID, const string& _tier) const;
+		uint getSeatPrice(uint _flightID, uint _seatNum) const;
+		const vector<string> getTiersNames(uint _flightID) const;
+		const string& getTierName(uint _flightID, uint _SeatNum) const;
+		bool isSeatOccupancy(uint _flightID, uint _seatNum) const;
+		const std::string& getSeatName(uint _flightID, uint _seatNum) const;
 
+//		const vector<string> getflightInfo(uint _flightID) const; // TODO
+//		const vector<vector<string> > getflightsInfo(uint _flightID) const; // TODO
 
 		// passenger function
+		bool isPassengerExist(uint _passengerID) const;
+		const string& getAddress(uint _passengerID) const;
+		const string& setAddress(uint _passengerID, const string& _address);
+		const string& getName(uint _passengerID) const;
+		const string& setName(uint _passengerID, const string& name);
+		const string& getPhone(uint _passengerID) const;
+		const string& setPhone(uint _passengerID, const string& phone);
+		const string& getPreferanceSeating(uint _passengerID) const;
+		const string& setPreferanceSeating(uint _passengerID, const string& preferanceSeating);
+
+		const vector<vector<string> > getTicketsInfo(uint _passengerID) const;
 
 
 		// booking function
-//		uint addTicket(uint _flighID, uint _seat, uint _passangerId, float _cost);
-//		bool removeTicket(uint _ticketNum);
-//		bool isBookingEmpty() const;
-//		uint countBookings() const;
-//		float getBookingCost(uint _ticketNum) const;
-//		float setBookingCost(uint _ticketNum, float cost);
-//		uint getBookingFlighId(uint _ticketNum) const;
-//		uint getBookingPassangerId(uint _ticketNum) const;
-//		uint getBookingSeat(uint _ticketNum) const;
-//		bool isTicketActive(uint _ticketNum) const;
-//		void deActivateTicket(uint _ticketNum);
-
+		const vector<string> getTicketInfo(uint _ticketNum) const;
+		uint countTickets() const;
+		float getBookingCost(uint _ticketNum) const;
+		uint getBookingFlighId(uint _ticketNum) const;
+		uint getBookingPassangerId(uint _ticketNum) const;
+		uint getSeatOfBooking(uint _ticketNum) const;
+		bool isTicketActive(uint _ticketNum) const;
+		void deActivateTicket(uint _ticketNum); // Supervisor
 
 		// TODO move those to protected
 		uint addFlight(const string& _flightNum, const string& _departure, const string& _destination, const string& _timeDeparture, const string& _plane );		// make friend to supervisor
@@ -70,6 +91,7 @@ class Manager_t
 		FlightManager_t* m_flightMngPtr;
 		PassengerManager_t* m_passengerMngPtr;
 		BookingManager_t* m_bookingMngPtr;
+		ReportFormatter_t* m_reportFormatterPtr;
 		Communicator_t* m_commPtr;
 
 		/* Disable the following by default */

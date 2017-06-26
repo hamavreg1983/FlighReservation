@@ -9,6 +9,7 @@
 #include "FlightManager_t.h"
 #include "PassengerManagert.h"
 #include "BookingManager_t.h"
+#include "ReportFormatter_t.h"
 //TODO #include  commactor h
 
 #include <list>
@@ -18,6 +19,7 @@ Manager_t::Manager_t()
 	m_flightMngPtr = new FlightManager_t();
 	m_passengerMngPtr = new PassengerManager_t();
 	m_bookingMngPtr = new BookingManager_t();
+	m_reportFormatterPtr = new ReportFormatter_t(*this);
 	m_commPtr = 0;
 }
 
@@ -26,12 +28,14 @@ Manager_t::Manager_t(Communicator_t* _commPtr)
 	m_flightMngPtr = new FlightManager_t();
 	m_passengerMngPtr = new PassengerManager_t();
 	m_bookingMngPtr = new BookingManager_t();
+	m_reportFormatterPtr = new ReportFormatter_t(*this);
 	m_commPtr = _commPtr;
 }
 
 Manager_t::~Manager_t()
 {
 	m_commPtr = 0;
+	delete m_reportFormatterPtr;
 	delete m_bookingMngPtr;
 	delete m_passengerMngPtr;
 	delete m_flightMngPtr;
@@ -151,6 +155,128 @@ bool Manager_t::updateFlight(uint _flightID, const string& _flightNum,
 	return true;
 }
 
+const string& Manager_t::getDeparture(uint _flightID) const
+{
+	return this->m_flightMngPtr->getDeparture(_flightID);
+}
+
+const string& Manager_t::getDestination(uint _flightID) const
+{
+	return this->m_flightMngPtr->getDestination(_flightID);
+}
+
+const string& Manager_t::getFlightNum(uint _flightID) const
+{
+	return this->m_flightMngPtr->getFlightNum(_flightID);
+}
+
+const string& Manager_t::getTimeDeparture(uint _flightID) const
+{
+	return this->m_flightMngPtr->getTimeDeparture(_flightID);
+}
+
+uint Manager_t::numberOfSeatAvalibul(uint _flightID) const
+{
+	return this->m_flightMngPtr->numberOfSeatAvalibul(_flightID);
+}
+
+bool Manager_t::isFlightFull(uint _flightID) const
+{
+	return this->m_flightMngPtr->isFlightFull(_flightID);
+}
+
+const vector<vector<string> > Manager_t::getFreeSeats(uint _flightID, const string& _tier) const
+{
+	const vector<uint> freeSeats = this->m_flightMngPtr->getFreeSeats(_flightID, _tier);
+	return m_reportFormatterPtr->reportFreeSeat(_flightID, freeSeats);
+}
+
+uint Manager_t::getTierPrice(uint _flightID, const string& _tier) const
+{
+	return this->m_flightMngPtr->getTierPrice(_flightID, _tier);
+}
+
+uint Manager_t::getSeatPrice(uint _flightID, uint _seatNum) const
+{
+	return this->m_flightMngPtr->getSeatPrice(_flightID, _seatNum);
+}
+
+const vector<string> Manager_t::getTiersNames(uint _flightID) const
+{
+	return this->m_flightMngPtr->getTiersName(_flightID);
+}
+
+bool Manager_t::isSeatOccupancy(uint _flightID, uint _seatNum) const
+{
+	return this->m_flightMngPtr->isSeatOccupancy(_flightID, _seatNum);
+}
+
+const std::string& Manager_t::getSeatName(uint _flightID, uint _seatNum) const
+{
+	return this->m_flightMngPtr->getSeatName(_flightID, _seatNum);
+}
+
+const string& Manager_t::getTierName(uint _flightID, uint _SeatNum) const
+{
+	return this->m_flightMngPtr->getTierName(_flightID, _SeatNum);
+}
+
+const vector<string> Manager_t::getTicketInfo(uint _ticketNum) const
+{
+	return m_reportFormatterPtr->reportTicket(_ticketNum);
+}
+
+uint Manager_t::countTickets() const
+{
+	return this->m_bookingMngPtr->count();
+}
+
+float Manager_t::getBookingCost(uint _ticketNum) const
+{
+	return this->m_bookingMngPtr->getCost(_ticketNum);
+}
+
+uint Manager_t::getBookingFlighId(uint _ticketNum) const
+{
+	return this->m_bookingMngPtr->getFlighId(_ticketNum);
+}
+
+uint Manager_t::getBookingPassangerId(uint _ticketNum) const
+{
+	return this->m_bookingMngPtr->getPassangerId(_ticketNum);
+}
+
+uint Manager_t::getSeatOfBooking(uint _ticketNum) const
+{
+	return this->m_bookingMngPtr->getSeat(_ticketNum);
+}
+
+bool Manager_t::isTicketActive(uint _ticketNum) const
+{
+	return this->m_bookingMngPtr->isTicketActive(_ticketNum);
+}
+
+void Manager_t::deActivateTicket(uint _ticketNum)
+{
+	return this->m_bookingMngPtr->deActivateTicket(_ticketNum);
+}
+
+const vector<vector<string> > Manager_t::getTicketsInfo(uint _passengerID) const
+{
+	const list<uint>& seats = this->m_passengerMngPtr->getTickets(_passengerID);
+
+	vector<vector<string> > output;
+	list<uint>::const_iterator itr = seats.begin();
+	while (itr != seats.end() )
+	{
+		// for every seat, do a nice report and push the vector<string> in to output.
+		output.push_back( m_reportFormatterPtr->reportTicket(*itr) );
+		++itr;
+	}
+
+	return output;
+}
+
 bool Manager_t::removeFlight(uint _flightID)
 {
 	if (! m_flightMngPtr->isFlightExsists(_flightID) )
@@ -161,21 +287,48 @@ bool Manager_t::removeFlight(uint _flightID)
 	return m_flightMngPtr->removeFlight(_flightID);
 }
 
+bool Manager_t::isPassengerExist(uint _passengerID) const
+{
+	return this->m_passengerMngPtr->isPassengerExist(_passengerID);
+}
 
+const string& Manager_t::getAddress(uint _passengerID) const
+{
+	return this->m_passengerMngPtr->getAddress(_passengerID);
+}
 
+const string& Manager_t::setAddress(uint _passengerID, const string& _address)
+{
+	return this->m_passengerMngPtr->setAddress(_passengerID, _address);
+}
 
+const string& Manager_t::getName(uint _passengerID) const
+{
+	return this->m_passengerMngPtr->getName(_passengerID);
+}
 
+const string& Manager_t::setName(uint _passengerID, const string& name)
+{
+	return this->m_passengerMngPtr->setName(_passengerID, name);
+}
 
+const string& Manager_t::getPhone(uint _passengerID) const
+{
+	return this->m_passengerMngPtr->getPhone(_passengerID);
+}
 
+const string& Manager_t::setPhone(uint _passengerID, const string& phone)
+{
+	return this->m_passengerMngPtr->setPhone(_passengerID, phone);
+}
 
+const string& Manager_t::getPreferanceSeating(uint _passengerID) const
+{
+	return this->m_passengerMngPtr->getPreferanceSeating(_passengerID);
+}
 
-
-
-
-
-
-
-
-
-
+const string& Manager_t::setPreferanceSeating(uint _passengerID, const string& preferanceSeating)
+{
+	return this->m_passengerMngPtr->setPreferanceSeating(_passengerID, preferanceSeating);
+}
 

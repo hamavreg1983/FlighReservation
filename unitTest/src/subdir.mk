@@ -17,10 +17,18 @@ CPP_SRCS += \
 ../src/PassengerManagert.cpp \
 ../src/PassengerManagert_test.cpp \
 ../src/Passenger_t.cpp \
+../src/ReportFormatter_t.cpp \
+../src/ReportFormatter_t_test.cpp \
 ../src/Seat_t.cpp \
 ../src/Tier_t.cpp \
 ../src/Tier_t_test.cpp \
-../src/allUnitTest.cpp 
+../src/all_Unit_test.cpp 
+
+O_SRCS += \
+../src/FlightReservationSys.o \
+../src/Flight_t.o \
+../src/PassengerManagert.o \
+../src/Tier_t.o 
 
 OBJS += \
 ./src/BookingManager_t.o \
@@ -36,10 +44,12 @@ OBJS += \
 ./src/PassengerManagert.o \
 ./src/PassengerManagert_test.o \
 ./src/Passenger_t.o \
+./src/ReportFormatter_t.o \
+./src/ReportFormatter_t_test.o \
 ./src/Seat_t.o \
 ./src/Tier_t.o \
 ./src/Tier_t_test.o \
-./src/allUnitTest.o 
+./src/all_Unit_test.o 
 
 CPP_DEPS += \
 ./src/BookingManager_t.d \
@@ -55,10 +65,12 @@ CPP_DEPS += \
 ./src/PassengerManagert.d \
 ./src/PassengerManagert_test.d \
 ./src/Passenger_t.d \
+./src/ReportFormatter_t.d \
+./src/ReportFormatter_t_test.d \
 ./src/Seat_t.d \
 ./src/Tier_t.d \
 ./src/Tier_t_test.d \
-./src/allUnitTest.d 
+./src/all_Unit_test.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

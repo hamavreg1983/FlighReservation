@@ -38,6 +38,8 @@ class Booking_t
 		static uint getStaticUniqeTicketNum();
 		uint getTicketNum() const;
 
+		static uint m_staticUniqeTicketNum;
+
 	private:
 		const uint m_ticketNum;
 		uint m_flighID;
@@ -45,8 +47,6 @@ class Booking_t
 		uint m_passangerId;
 		float m_cost;
 		bool m_isActiveTicket; // historical ticket is false
-
-		static uint m_staticUniqeTicketNum;
 
 		/* Disable the following by default */
 		Booking_t(const Booking_t& other);

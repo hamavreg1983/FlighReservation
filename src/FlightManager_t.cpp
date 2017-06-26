@@ -203,3 +203,8 @@ bool FlightManager_t::isFlightExsists(uint _flightID) const
 
 	return (itr == m_flights.end() ) ? false : true;
 }
+
+const string& FlightManager_t::getTierName(uint _flightID, uint _SeatNum) const
+{
+	return this->findFlight(_flightID)->getTierName(_flightID);
+}
