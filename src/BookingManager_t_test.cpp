@@ -17,11 +17,12 @@ static uint _seat = 13;
 static uint _passangerId = 398507060;
 static uint _cost = 999;
 
-static uint ticketID = 0;
+static uint ticketID;
 
 TEST(BookingManager_t, init)
 {
 	BookingManager_t BM;
+	ticketID = BM.getTotalTicketNum();
 }
 
 TEST(BookingManager_t, addTicket)

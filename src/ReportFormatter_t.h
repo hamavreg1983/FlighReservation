@@ -30,8 +30,8 @@ class ReportFormatter_t
 
 		const vector<vector<string> > reportFreeSeat(uint _flightID, const vector<uint>& _seatIdContiner) const;
 		const vector<string> reportTicket(uint _ticketNum) const;
-		const vector<string> reportPassenger(uint _passenger) const; // TODO
-		const vector<string> reportFlight(uint _ticketNum) const; // TODO
+		const vector<string> reportPassenger(uint _passenger) const;
+		const vector<string> reportFlight(uint _flightID) const;
 
 	private:
 		const Manager_t& m_manger;

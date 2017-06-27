@@ -38,9 +38,9 @@ class Booking_t
 		static uint getStaticUniqeTicketNum();
 		uint getTicketNum() const;
 
+	private:
 		static uint m_staticUniqeTicketNum;
 
-	private:
 		const uint m_ticketNum;
 		uint m_flighID;
 		uint m_seat;

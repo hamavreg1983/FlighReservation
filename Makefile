@@ -72,7 +72,7 @@ clean:
 	rm -f a.out
 	rm -f outputFile.txt
 #	rm -f $(LIB_CREATED_PATH)/$(LIBSCREATE)
-	rm -f $(LIB_NEEDED_PATH1)$(LIB_NEEDED1)
+	rm -f $(LIB_NEEDED_PATH1)/$(LIB_NEEDED1)
 	$(MAKE) clean -C $(LIB_NEEDED_PATH1)../
 
 rebuild : clean $(EXE_NAME)

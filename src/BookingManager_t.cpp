@@ -119,3 +119,8 @@ Booking_t* BookingManager_t::findTicket(uint _ticketNum) const
 	}
 	return (itr == m_bookings.end() ) ? 0 : (*itr).second;
 }
+
+uint BookingManager_t::getTotalTicketNum() const
+{
+	return Booking_t::getStaticUniqeTicketNum();
+}

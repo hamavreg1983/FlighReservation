@@ -213,3 +213,16 @@ uint FlightManager_t::getTotalFlightNum() const
 {
 	return Flight_t::getFlightStaticID();
 }
+
+const vector<uint> FlightManager_t::getFlights() const
+{
+	vector<uint> output;
+	map<uint, Flight_t*>::const_iterator itr = m_flights.begin();
+	while (itr != m_flights.end() )
+	{
+		output.push_back( (*itr).first );
+		++itr;
+	}
+
+	return output;
+}

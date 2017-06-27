@@ -274,6 +274,29 @@ const vector<vector<string> > Manager_t::getTicketsInfo(uint _passengerID) const
 	return output;
 }
 
+const vector<string> Manager_t::getPassengerInfo(uint _passengerID) const
+{
+	return m_reportFormatterPtr->reportPassenger(_passengerID);
+}
+
+const vector<string> Manager_t::getflightInfo(uint _flightID) const
+{
+	return m_reportFormatterPtr->reportFlight(_flightID);
+}
+
+const vector<vector<string> > Manager_t::getflightsInfo() const
+{
+	vector<vector<string> > output;
+	const vector<uint> flightsId = m_flightMngPtr->getFlights();
+
+	for (uint i = 0; i < flightsId.size() ; ++i)
+	{
+		output.push_back(getflightInfo(flightsId[i]));
+	}
+
+	return output;
+}
+
 bool Manager_t::removeFlight(uint _flightID)
 {
 	if (! m_flightMngPtr->isFlightExsists(_flightID) )

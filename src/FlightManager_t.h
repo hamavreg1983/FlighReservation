@@ -62,6 +62,9 @@ class FlightManager_t
 		bool cancelSeat(uint _flightID, uint _seatNum) const;
 
 		uint getTotalFlightNum() const;
+
+		const vector<uint> getFlights() const;
+
 	protected:
 
 		//Flight_t* findFlight(const string _flightNum) const;

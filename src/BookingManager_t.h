@@ -41,6 +41,8 @@ class BookingManager_t
 		bool isTicketActive(uint _ticketNum) const;
 		void deActivateTicket(uint _ticketNum);
 
+		uint getTotalTicketNum() const;
+
 	private:
 		map<uint, Booking_t*> m_bookings;
 		void activateTicket(uint _ticketNum);

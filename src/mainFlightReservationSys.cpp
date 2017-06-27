@@ -7,38 +7,56 @@
 //============================================================================
 
 #include <iostream>
-#include "PassengerManagert.h"
-#include "Tier_t.h"
+#include "I_UI_t.h"
+#include "UI_supervisor_t.h"
+#include "Manager_t.h"
 
 using namespace std;
+
+I_UI_t* chooseUI();
 
 int main() {
 	cout << "---START--" << endl;
 
-	{
-		PassengerManager_t aPassMan;
-		aPassMan.addPassenger(77, "Yuval", "telAviv", "123987", "next to window");
-		cout << "size " << aPassMan.count() << endl ;
-	}
+	Manager_t* frsSys = new Manager_t;
 
-	{
-		PassengerManager_t aPassMan;
-		cout << "isEmpty " << aPassMan.isEmpty() << endl ;
-		cout << "size " << aPassMan.count() << endl ;
-		aPassMan.addPassenger(69);
+	I_UI_t* ui = 0;
+	ui = chooseUI();
 
-		cout << "add new resulted in " << aPassMan.addPassenger(42) << endl ;
-		cout << "add exist resulted in " << aPassMan.addPassenger(53) << endl ;
-		cout << "isEmpty " << aPassMan.isEmpty() << endl ;
-		cout << "size " << aPassMan.count() << endl ;
-	}
+	ui->connect(frsSys); // todo. change to comm when its done
+	ui->UI_do();
+	ui->disconnct();
 
-	{
-		Tier_t tierA("first Class", 30, 10, 999);
-		cout << tierA.getTierId() << endl;
-		cout << tierA.getSeatName(39) << endl;
-	}
+	delete ui;
+	delete frsSys;
 
 	cout << "---END--" << endl;
 	return 0;
+}
+
+I_UI_t* chooseUI()
+{
+	I_UI_t* ui = 0;
+	int choosenUI;
+
+	while (ui == 0)
+	{
+		cout << "Welcome to ElAl Flight Reservation System (FRS).\n---------------------------------------\n which kind of user are you?\n";
+		cout << "\t1 - user\n\t2 - supervisor\n";
+		cin >> choosenUI;
+
+		if (choosenUI == 1)
+		{
+			ui = new UI_supervisor_t; // TODO change to user when i do it
+		}
+		else if (choosenUI == 2)
+		{
+			ui = new UI_supervisor_t;
+		}
+		else
+		{
+			cout << "ERORR! try again\n";
+		}
+	}
+	return ui;
 }

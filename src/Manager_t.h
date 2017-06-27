@@ -20,6 +20,9 @@ class BookingManager_t;
 class ReportFormatter_t;
 class Communicator_t;
 
+
+// TODO catch throw at manger and rethrow to UI. right now the ui catch all ex.
+
 class Manager_t
 {
 
@@ -53,8 +56,8 @@ class Manager_t
 		bool isSeatOccupancy(uint _flightID, uint _seatNum) const;
 		const std::string& getSeatName(uint _flightID, uint _seatNum) const;
 
-//		const vector<string> getflightInfo(uint _flightID) const; // TODO
-//		const vector<vector<string> > getflightsInfo(uint _flightID) const; // TODO
+		const vector<string> getflightInfo(uint _flightID) const;
+		const vector<vector<string> > getflightsInfo() const;
 
 		// passenger function
 		bool isPassengerExist(uint _passengerID) const;
@@ -66,6 +69,8 @@ class Manager_t
 		const string& setPhone(uint _passengerID, const string& phone);
 		const string& getPreferanceSeating(uint _passengerID) const;
 		const string& setPreferanceSeating(uint _passengerID, const string& preferanceSeating);
+
+		const vector<string> getPassengerInfo(uint _passengerID) const;
 
 		const vector<vector<string> > getTicketsInfo(uint _passengerID) const;
 
