@@ -23,5 +23,8 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+FRS_manger \
+UI \
+controler \
 src \
 

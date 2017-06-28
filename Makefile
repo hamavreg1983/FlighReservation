@@ -3,79 +3,47 @@
 # 26/6/2017
 # FRS
 
-# File names
-EXE_NAME = FRS
-#SOURCES_FILES = $(wildcard $(SOURCE_PATH)/*.cpp)
-SOURCES_FILES = $(shell find . -type f -name '*.cpp' ! -name '*test.cpp' ! -name 'main*')
-SOURCES_TEST_FILES = $(shell find . -type f -name '*test.cpp')
+# excutable name
+TARGET = FRS
 
-OBJECTS_FILES = $(SOURCES_FILES:.cpp=.o)
-#OBJECTS_FILES = $(wildcard $(OBJECT_PATH)/*.o)
-OBJECTS_TEST_FILES = $(SOURCES_TEST_FILES:.cpp=.o)
+MAIN_SOURCE = $(shell find . -type f -name 'main*.cpp')
+TEST_SOURCE = $(shell find . -type f -name '*_test.cpp' ! -name 'main*')
+SOURCES = $(shell find . -type f -name '*.cpp' ! -name '*test.cpp' ! -name 'main*')
 
-OBJECT_MAIN = $(OBJECT_PATH)mainFlightReservationSys.o
+REQ_LIB = googleTest
+REQ_LIB_NAME = lib$(REQ_LIB).a
+REQ_LIB_PATH = ../googleTest/lib/
 
-HFILE = $(wildcard $(H_LOCAL_PATH)/*.h) 
+OBJECTS = $(SOURCES:.cpp=.o) $(MAIN_SOURCE:.cpp=.o)
 
-LIB_NEEDED_PATH1 = ../googleTest/lib/
-LIB_NEEDED1 = libgoogleTest.a
-
-LIB_NEEDED_PATH2 = 
-LIB_NEEDED2 = 
-
-#LIBSCREATE = $(EXE_NAME).a
-#LIB_CREATED_PATH = .
-
-INCLUDES_PATH = -I UI -I comm -I inc
-HPATH = inc/
-H_LOCAL_PATH = src
-SOURCE_PATH = src/
-OBJECT_PATH = src/
-
-CFLAGS = -g -ansi -pedantic -Wall -I $(HPATH) -I $(H_LOCAL_PATH) $(INCLUDES_PATH)
+CCFLAGS = -IUI -Isrc -Igtest -IFRS_manger -Icontroler
+LDFLAGS = 
 CC = g++
 
-.Phony : clean rebuild run unitTest
+.Phony : all clean rebuild run unitTest
 
-# Main target
-$(EXE_NAME): $(OBJECTS_FILES) $(OBJECT_MAIN)
-	$(CC) $(CFLAGS) $(OBJECTS_FILES) $(OBJECT_MAIN) -o $(EXE_NAME) 
+all: $(TARGET)
 
-unitTest: $(OBJECTS_FILES) $(OBJECTS_TEST_FILES) $(LIB_NEEDED1)
-	$(CC) $(CFLAGS) $(OBJECTS_FILES) $(OBJECTS_TEST_FILES) -L$(LIB_NEEDED_PATH1) -lgoogleTest -o $(EXE_NAME)_unitTest -lpthread
+$(TARGET): $(OBJECTS)
+	$(CC) -o $@ $(notdir $^) $(LDFLAGS) 
 
-# To obtain object files
-$(OBJECT_PATH)/%.o: %.c 
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp %.h
+	$(CC) $(CCFLAGS) -c $<
 
-# To obtain object files
-%.o: %.c 
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp
+	$(CC) $(CCFLAGS) -c $<
 
-#$(LIB_CREATED_PATH)/$(LIBSCREATE) : $(OBJECTS_FILES)
-#	ar -cvrs $(LIB_CREATED_PATH)/$(LIBSCREATE) $(OBJECTS_FILES)
+unitTest: $(SOURCES:.cpp=.o) $(TEST_SOURCE:.cpp=.o) $(REQ_LIB_NAME)
+	$(CC) -o $(TARGET)_test $(notdir $(SOURCES:.cpp=.o) $(TEST_SOURCE:.cpp=.o)) $(LDFLAGS) $(REQ_LIB_PATH)$(REQ_LIB_NAME) -pthread
 
-$(LIB_NEEDED_PATH1)/$(LIB_NEEDED1) : 
-	$(MAKE) $(LIB_NEEDED1) -C $(LIB_NEEDED_PATH1)../
-	
-$(LIB_NEEDED1) : $(LIB_NEEDED_PATH1)/$(LIB_NEEDED1)
-
-run: ${EXE_NAME} 
-	./${EXE_NAME}
+$(REQ_LIB_NAME):
+	$(MAKE) -C $(REQ_LIB_PATH)../
 
 clean:
-	rm -f *.o
-	rm -f $(OBJECT_PATH)/*.o
-	rm -f $(OBJECTS_FILES)
-	rm -f *~
-	rm -f $(EXE_NAME)
-	rm -f $(EXE_NAME)_unitTest
-	rm -f a.out
-	rm -f outputFile.txt
-#	rm -f $(LIB_CREATED_PATH)/$(LIBSCREATE)
-	rm -f $(LIB_NEEDED_PATH1)/$(LIB_NEEDED1)
-	$(MAKE) clean -C $(LIB_NEEDED_PATH1)../
+	rm -f *.o $(TARGET) $(TARGET)_test
+	$(MAKE) clean -C $(REQ_LIB_PATH)../
 
-rebuild : clean $(EXE_NAME)
+rebuild : clean $(TARGET)
 
-
+run: $(TARGET)
+	./$(TARGET)

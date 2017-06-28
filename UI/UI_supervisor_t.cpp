@@ -399,7 +399,7 @@ void UI_supervisor_t::showFreeSeats(uint _flightID, const string& _tier) const
 {
 	cout << "\nHere a list of available seats:\n";
 	const vector<vector<string> > info = m_mangerPtr->getFreeSeats(_flightID, _tier);
-	for (int i = 0; i < info.size() ; ++i)
+	for (uint i = 0; i < info.size() ; ++i)
 	{
 		printOut( info.at(i) );
 	}
