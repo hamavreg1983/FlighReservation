@@ -32,7 +32,7 @@ void UI_supervisor_t:: UI_do()
 	string password;
 	cin >> password;
 	// TODO check password
-	cout << "\nEntering FRS.";
+	cout << "\nEntering FRS.\n";
 
 	bool toExit = false;
 	while (!toExit)
@@ -58,7 +58,7 @@ bool UI_supervisor_t:: level1() const
 	{
 		counter = 0;
 
-		cout << "choose your action:\n";
+		cout << "\n===========================================\nMain menu. \n\tChoose your action:\n";
 		cout << counter   << " - exit \n";
 		cout << ++counter << " - add flight \n";
 		cout << ++counter << " - cancel flight \n";
@@ -72,6 +72,8 @@ bool UI_supervisor_t:: level1() const
 		cout << ++counter << " - Cancel Ticket \n";
 		cout << ++counter << " - show Ticket info \n";
 		cout << ++counter << " - show all Tickets info of passenger \n";
+
+		cout << "\n===========================================\n";
 
 // TODO this:
 // update person

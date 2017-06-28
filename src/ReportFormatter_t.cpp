@@ -75,3 +75,27 @@ string ReportFormatter_t:: itos(int _num) const
 	return convert.str(); // set 'Result' to the contents of the stream
 }
 
+const vector<string> ReportFormatter_t::reportPassenger(uint _passenger) const
+{
+	vector<string> output;
+	output.push_back( itos(_passenger) );
+	output.push_back( m_manger.getName(_passenger) );
+	output.push_back( m_manger.getPhone(_passenger) );
+	output.push_back( m_manger.getAddress(_passenger) );
+	output.push_back( m_manger.getPreferanceSeating(_passenger) );
+
+	return output;
+}
+
+const vector<string> ReportFormatter_t::reportFlight(uint _flightID) const
+{
+	vector<string> output;
+	output.push_back( itos(_flightID) );
+	output.push_back( m_manger.getFlightNum(_flightID) );
+	output.push_back( m_manger.getDeparture(_flightID) );
+	output.push_back( m_manger.getDestination(_flightID) );
+	output.push_back( m_manger.getTimeDeparture(_flightID) );
+	output.push_back( itos( m_manger.numberOfSeatAvalibul(_flightID) ) );
+
+	return output;
+}
