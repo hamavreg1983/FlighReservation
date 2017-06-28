@@ -25,4 +25,17 @@ TEST(UI_supervisor, init2)
 //	ui.UI_do();
 }
 
+//TEST(UI_supervisor, testWithFlightAndPassnger)
+//{
+//	UI_supervisor_t ui;
+//	Manager_t man;
+//	ui.connect(&man);
+//
+//	man.addFlight("elal1", "tlv", "LAX", "23:59", "blaPlane");
+//	man.addFlight("elal1", "tlv", "SFO", "23:59", "blaPlane");
+//	man.passenger(666, "Yuval", "Kfa", "55555", "window Seat");
+//
+//	ui.UI_do();
+//}
+
 

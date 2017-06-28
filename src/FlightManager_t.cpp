@@ -128,8 +128,7 @@ bool FlightManager_t::isFlightFull(uint _flightID) const
 	return this->findFlight(_flightID)->isFlightFull();
 }
 
-const vector<uint> FlightManager_t::getFreeSeats(uint _flightID,
-		const string& _tier) const
+const vector<uint> FlightManager_t::getFreeSeats(uint _flightID, const string& _tier) const
 {
 	return this->findFlight(_flightID)->getFreeSeats(_tier);
 }

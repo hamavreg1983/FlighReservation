@@ -25,6 +25,11 @@ class UI_supervisor_t : public I_UI_t {
 		void connect(const Manager_t* _comm);
 
 		/* Inherited
+		 * 		void connect(const Communication_t* _comm);
+		void disconnct() { m_comm = 0; return; }
+
+		string transmit(const string _command);
+		string receive ();
 		*/
 
 	private:
@@ -44,9 +49,14 @@ class UI_supervisor_t : public I_UI_t {
 		void showTicket() const;
 		void showTickets() const;
 		void showTicket(uint _ticketNum) const;
+		void showFreeSeats(uint _flightID, const string& _tier) const;
+		void showTierNames(uint _flightID) const;
 
 
 		/* Inherited
+		 * bool is_digitsOnly(const std::string& _str) const;
+		std::string itos(int _num) const;
+		Communication_t* m_comm;
 		 */
 
 		/* Disable the following by default */

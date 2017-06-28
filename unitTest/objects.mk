@@ -2,7 +2,7 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-USER_OBJS := ../../googleTest/Release/libgoogleTest.a
+USER_OBJS := ../../googleTest/lib/libgoogleTest.a
 
 LIBS := -lpthread
 

@@ -26,12 +26,13 @@ LIB_NEEDED2 =
 #LIBSCREATE = $(EXE_NAME).a
 #LIB_CREATED_PATH = .
 
+INCLUDES_PATH = -I UI -I comm -I inc
 HPATH = inc/
 H_LOCAL_PATH = src
 SOURCE_PATH = src/
 OBJECT_PATH = src/
 
-CFLAGS = -g -ansi -pedantic -Wall -I $(HPATH) -I $(H_LOCAL_PATH)
+CFLAGS = -g -ansi -pedantic -Wall -I $(HPATH) -I $(H_LOCAL_PATH) $(INCLUDES_PATH)
 CC = g++
 
 .Phony : clean rebuild run unitTest

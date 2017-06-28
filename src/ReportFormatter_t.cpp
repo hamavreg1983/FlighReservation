@@ -22,17 +22,19 @@ ReportFormatter_t::~ReportFormatter_t()
 const vector<vector<string> > ReportFormatter_t::reportFreeSeat(uint _flightID, const vector<uint>& _seatIdContiner) const
 {
 	vector<vector<string> > output;
-	int column;
 
 	for (uint i = 0 ; i < _seatIdContiner.size() ; ++i)
 	{
-		column = 0;
+		vector<string> subVector;
+
 		// first item is SeatID
-		output[i][column++] = _seatIdContiner[i];
+		subVector.push_back( itos( _seatIdContiner[i] ) ); //TODO bug!
 		// second item is seatName
-		output[i][column++] = m_manger.getSeatName(_flightID, _seatIdContiner[i]);
-		// thired is Tier Name
-		output[i][column++] = m_manger.getTierName(_flightID, _seatIdContiner[i]);
+		subVector.push_back( m_manger.getSeatName(_flightID, _seatIdContiner[i]) );
+		// Third is Tier Name
+		subVector.push_back( m_manger.getTierName(_flightID, _seatIdContiner[i]) );
+
+		output.push_back(subVector);
 	}
 
 	return output;

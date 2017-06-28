@@ -8,6 +8,8 @@
 #include <string>
 #include "UI_supervisor_t.h"
 
+// TODO move const char* to const string define in ine place.
+
 UI_supervisor_t::UI_supervisor_t()
 {
 	// TODO Auto-generated constructor stub
@@ -336,6 +338,12 @@ uint UI_supervisor_t::orderTicket() const
 	cout << "Enter the flight ID number.\n";
 	uint flightID = chooseUniqeID();
 
+	showTierNames(flightID);
+	cout << "Enter the tier name.\n";
+	string tier;
+	cin >> tier;
+
+	showFreeSeats(flightID, tier);
 	cout << "Enter the seat ID number.\n";
 	uint seatID = chooseUniqeID();
 
@@ -384,5 +392,26 @@ void UI_supervisor_t::showTicket(uint _ticketNum) const
 {
 	const vector<string> info = m_mangerPtr->getTicketInfo(_ticketNum);
 	printOut(info);
+	return;
+}
+
+void UI_supervisor_t::showFreeSeats(uint _flightID, const string& _tier) const
+{
+	cout << "\nHere a list of available seats:\n";
+	const vector<vector<string> > info = m_mangerPtr->getFreeSeats(_flightID, _tier);
+	for (int i = 0; i < info.size() ; ++i)
+	{
+		printOut( info.at(i) );
+	}
+	return;
+	// TODO user can enter seat number not in tier selected
+}
+
+void UI_supervisor_t::showTierNames(uint _flightID) const
+{
+	cout << "\nAvalibul Tier on flight" << _flightID << ":\n";
+
+	const vector<string> info = m_mangerPtr->getTiersNames(_flightID);
+	printOut(info); // TODO do print as menu and user chooses number and not type nane
 	return;
 }

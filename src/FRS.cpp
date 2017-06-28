@@ -52,7 +52,7 @@ I_UI_t* FRS::UI_start()
 	I_UI_t* ui = 0;
 	ui = chooseUI();
 
-	ui->connect(m_mngr); // todo. change to comm when its done
+	ui->connect(m_mngr); // TODO. change to comm when its done
 	ui->UI_do();
 
 	return ui;
