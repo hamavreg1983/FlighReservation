@@ -8,6 +8,7 @@
 #ifndef UI_SUPERVISOR_T_H_
 #define UI_SUPERVISOR_T_H_
 
+#include <iomanip> // setw
 #include "I_UI_t.h"
 
 using namespace std;
@@ -44,6 +45,7 @@ class UI_supervisor_t : public I_UI_t {
 		uint showFlight() const;
 		void showFlights() const;
 		void removeFlight() const;
+		void updateFlight() const;
 		uint orderTicket() const;
 		void cancelTicket() const;
 		void showTicket() const;
@@ -51,7 +53,14 @@ class UI_supervisor_t : public I_UI_t {
 		void showTicket(uint _ticketNum) const;
 		void showFreeSeats(uint _flightID, const string& _tier) const;
 		void showTierNames(uint _flightID) const;
+		inline void ticketHeaderPrint() const;
+		inline void flightHeaderPrint() const;
+		inline void personHeaderPrint() const;
 
+		template<typename T> void printElement(T t, const int& width) const
+		{
+		    cout << left << std::setw(width) << std::setfill(' ') << t;
+		}
 
 		/* Inherited
 		 * bool is_digitsOnly(const std::string& _str) const;

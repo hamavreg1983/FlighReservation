@@ -28,7 +28,7 @@ const vector<vector<string> > ReportFormatter_t::reportFreeSeat(uint _flightID, 
 		vector<string> subVector;
 
 		// first item is SeatID
-		subVector.push_back( itos( _seatIdContiner[i] ) ); //TODO bug!
+		subVector.push_back( itos( _seatIdContiner[i] ) ); //TODO bug?
 		// second item is seatName
 		subVector.push_back( m_manger.getSeatName(_flightID, _seatIdContiner[i]) );
 		// Third is Tier Name

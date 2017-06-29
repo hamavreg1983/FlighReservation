@@ -8,6 +8,9 @@
 #include <string>
 #include "UI_supervisor_t.h"
 
+const int g_column = 15;
+
+
 // TODO move const char* to const string define in ine place.
 
 UI_supervisor_t::UI_supervisor_t()
@@ -72,7 +75,7 @@ bool UI_supervisor_t:: level1() const
 		cout << ++counter << " - show passenger info \n";
 		cout << ++counter << " - Order Ticket \n";
 		cout << ++counter << " - Cancel Ticket \n";
-		cout << ++counter << " - show Ticket info \n";
+		cout << ++counter << " - show Ticket info\n";
 		cout << ++counter << " - show all Tickets info of passenger \n";
 
 		cout << "\n===========================================\n";
@@ -97,7 +100,7 @@ bool UI_supervisor_t:: level1() const
 				removeFlight();
 				break;
 			case 3: //update flight
-										cout << "\n not implemented \n";
+				updateFlight();
 				break;
 			case 4: //show flight info
 				showFlight();
@@ -120,10 +123,10 @@ bool UI_supervisor_t:: level1() const
 			case 10: //Cancel Ticket
 				cancelTicket();
 				break;
-			case 11: //show Ticket info
+			case 11: //show Ticket
 				showTicket();
 				break;
-			case 12: //show all Tickets info
+			case 12: //show all Tickets info info for passenger
 				showTickets();
 				break;
 
@@ -186,7 +189,7 @@ uint UI_supervisor_t::showPassenger() const
 	uint idPassnger = chooseUniqeID();
 
 	const vector<string> info = m_mangerPtr->getPassengerInfo(idPassnger);
-
+	personHeaderPrint();
 	printOut(info);
 
 	return idPassnger;
@@ -235,9 +238,9 @@ void UI_supervisor_t::printOut(const vector<string> _info) const
 {
 	for (uint i = 0; i < _info.size() ; ++i)
 	{
-		cout << _info[i] << "\t";
+		printElement(_info[i], g_column);
 	}
-	cout << "\n";
+	cout << endl;
 }
 
 uint UI_supervisor_t::addFlight(void) const
@@ -294,12 +297,14 @@ void UI_supervisor_t::showFlight(uint _flightID) const
 uint UI_supervisor_t::showFlight() const
 {
 	uint id = chooseUniqeID();
+	flightHeaderPrint();
 	showFlight(id);
 	return id;
 }
 
 void UI_supervisor_t::showFlights() const
 {
+	flightHeaderPrint();
 	const vector<vector<string> > info = m_mangerPtr->getflightsInfo();
 	for (uint i = 0; i < info.size() ; ++i)
 	{
@@ -381,6 +386,7 @@ void UI_supervisor_t::showTickets() const
 	cout << "Enter the passenger ID number.\n";
 	uint passenger = chooseUniqeID();
 	const vector<vector<string> > info = m_mangerPtr->getTicketsInfo(passenger);
+	ticketHeaderPrint();
 	for (uint i = 0; i < info.size() ; ++i)
 	{
 		printOut(info[i]);
@@ -391,6 +397,7 @@ void UI_supervisor_t::showTickets() const
 void UI_supervisor_t::showTicket(uint _ticketNum) const
 {
 	const vector<string> info = m_mangerPtr->getTicketInfo(_ticketNum);
+	ticketHeaderPrint();
 	printOut(info);
 	return;
 }
@@ -407,6 +414,55 @@ void UI_supervisor_t::showFreeSeats(uint _flightID, const string& _tier) const
 	// TODO user can enter seat number not in tier selected
 }
 
+void UI_supervisor_t::updateFlight() const
+{
+	cout << "\nUpdating flight information\n-----------------------------\nAll flights\n";
+	showFlights();
+	uint flightID = chooseUniqeID();
+
+	cout << "\nSelected flight information:\n";
+	showFlight(flightID);
+
+	string flightNum;
+	string departure;
+	string destination;
+	string timeDeparture;
+
+	cout << "in order to add a update flight you would need to answer a few questions\n";
+	while (flightNum.empty() )
+	{
+		cout << "Flight Number: ";
+		cin >> flightNum;
+	}
+	while (departure.empty() )
+	{
+		cout << "Departure Airport: ";
+		cin >> departure;
+	}
+	while (destination.empty() )
+	{
+		cout << "Destination Airport: ";
+		cin >> destination;
+	}
+	while (timeDeparture.empty() )
+	{
+		cout << "Time and date of Departure (2017-05-17 17:58:00) : ";
+		cin >> timeDeparture;
+	}
+
+	if (m_mangerPtr->updateFlight(flightID, flightNum, departure, destination, timeDeparture) )
+	{
+		cout << "\nSucsses.\n";
+	}
+	else
+	{
+		cout << "Failed.\n";
+	}
+	showFlight(flightID);
+
+	return;
+}
+
 void UI_supervisor_t::showTierNames(uint _flightID) const
 {
 	cout << "\nAvalibul Tier on flight" << _flightID << ":\n";
@@ -414,4 +470,43 @@ void UI_supervisor_t::showTierNames(uint _flightID) const
 	const vector<string> info = m_mangerPtr->getTiersNames(_flightID);
 	printOut(info); // TODO do print as menu and user chooses number and not type nane
 	return;
+}
+
+inline void UI_supervisor_t::ticketHeaderPrint() const
+{
+	printElement("ticketID", g_column);
+	printElement("Flight#", g_column);
+	printElement("Flight Name", g_column);
+	printElement("Departure", g_column);
+	printElement("Destination", g_column);
+	printElement("When", g_column);
+	printElement("SeatID", g_column);
+	printElement("SeatName", g_column);
+	printElement("Tier", g_column);
+	printElement("Passenger Name", g_column);
+	printElement("Cost", g_column);
+	printElement("Active", g_column);
+	cout << endl;
+
+}
+
+inline void UI_supervisor_t::flightHeaderPrint() const
+{
+	printElement("FlightID", g_column);
+	printElement("Flight#", g_column);
+	printElement("Departure", g_column);
+	printElement("Destination", g_column);
+	printElement("When", g_column);
+	printElement("Free Seats", g_column);
+	cout << endl;
+}
+
+inline void UI_supervisor_t::personHeaderPrint() const
+{
+	printElement("PassengerID", g_column);
+	printElement("Name", g_column);
+	printElement("Phone#", g_column);
+	printElement("Address", g_column);
+	printElement("Seating Pref", g_column);
+	cout << endl;
 }

@@ -31,9 +31,10 @@ TEST(UI_supervisor, init2)
 //	Manager_t man;
 //	ui.connect(&man);
 //
-//	man.addFlight("elal1", "tlv", "LAX", "23:59", "blaPlane");
-//	man.addFlight("elal1", "tlv", "SFO", "23:59", "blaPlane");
+//	uint flight1 = man.addFlight("elal1", "tlv", "LAX", "23:59", "blaPlane");
+//	man.addFlight("elal2", "tlv", "SFO", "23:59", "blaPlane");
 //	man.passenger(666, "Yuval", "Kfa", "55555", "window Seat");
+//	man.order(flight1 , 2, 666);
 //
 //	ui.UI_do();
 //}
