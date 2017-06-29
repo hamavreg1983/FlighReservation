@@ -25,11 +25,13 @@ bool I_UI_t:: is_digitsOnly(const std::string& _str) const
 string I_UI_t::transmit(const string _command)
 {
 	cout << "\n\tnot implemented\n";
+	return "\n\tnot implemented\n";
 }
 
 string I_UI_t::receive()
 {
 	cout << "\n\tnot implemented\n";
+	return "\n\tnot implemented\n";
 }
 
 std::string I_UI_t:: itos(int _num) const

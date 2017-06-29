@@ -21,8 +21,10 @@ Communication_t::~Communication_t()
 string Communication_t::send(const string& _command)
 {
 	cout << "test print out at Communication_t::send. |" << _command << endl;
+	return "\n\tnot implemented\n";
 }
 
 string Communication_t::read()
 {
+	return "\n\tnot implemented\n";
 }
