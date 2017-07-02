@@ -411,7 +411,7 @@ void UI_supervisor_t::showFreeSeats(uint _flightID, const string& _tier) const
 		printOut( info.at(i) );
 	}
 	return;
-	// TODO user can enter seat number not in tier selected
+	// TODO user can enter seat number not in tier selected. ia it a bug or a feature.
 }
 
 void UI_supervisor_t::updateFlight() const

@@ -93,7 +93,7 @@ const list<uint>& PassengerManager_t::getTickets(uint _passengerID) const
 	return this->findPassenger(_passengerID).getTickets();
 }
 
-bool PassengerManager_t::isPassengerExist(uint _passengerID) const // TODO make sure this function works!
+bool PassengerManager_t::isPassengerExist(uint _passengerID) const
 {
 	try
 	{
